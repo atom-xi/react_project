@@ -24,10 +24,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename:
-        ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
-      chunkFilename:
-        ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css"
+      filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
+      chunkFilename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css"
     })
     // new webpack.optimize.CommonsChunkPlugin({
     //   names: ["vendor"],
@@ -68,9 +66,15 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
           },
-          "css-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]--[hash:base64:5]',
+            }
+          },
           {
             loader: "postcss-loader",
             options: {

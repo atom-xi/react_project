@@ -30,7 +30,7 @@
 
 import React from "react";
 import { HashRouter as Router, Route, Link } from "react-router-dom";
-
+import * as style from './App.css'
 // Some folks find value in a centralized route config.
 // A route config is just data. React is great at mapping
 // data into components, and <Route> is a component.
@@ -44,7 +44,7 @@ function Sandwiches() {
 function Tacos({ routes }: any) {
   return (
     <div>
-      <h2>Tacos</h2>
+      <h2 className="dd">Tacos</h2>
       <ul>
         <li>
           <Link to="/tacos/bus">Bus</Link>
