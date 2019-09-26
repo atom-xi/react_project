@@ -1,130 +1,31 @@
-// import React from "react";
-// import { HashRouter, Route, Link } from "react-router-dom";
+import React, { lazy, Suspense } from 'react';
+import { HashRouter, Route, Link, Switch } from "react-router-dom";
 
-// class App extends React.Component {
-//   render() {
-//     return (
-//       <div>This is TS</div>
+const Home = React.lazy(() => import('./view/home/Home'));
+const Login = React.lazy(() => import('./view/login/Login'));
+console.log("Home-->", Home)
 
-//     )
-//   }
-// }
-
-// export default App
-
-
-// import React from 'react';
-// import Router from './router/Router';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <div>This is route info</div>
-//       <Router />
-//     </div>
-//   );
-// }
-
-// export default App;
-
-import React from "react";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
-import * as style from './App.css'
-// Some folks find value in a centralized route config.
-// A route config is just data. React is great at mapping
-// data into components, and <Route> is a component.
-
-////////////////////////////////////////////////////////////
-// first our route components
-function Sandwiches() {
-  return <h2>Sandwiches</h2>;
-}
-
-function Tacos({ routes }: any) {
-  return (
-    <div>
-      <h2 className="dd">Tacos</h2>
-      <ul>
-        <li>
-          <Link to="/tacos/bus">Bus</Link>
-        </li>
-        <li>
-          <Link to="/tacos/cart">Cart</Link>
-        </li>
-      </ul>
-
-      {routes.map((route: any, i: any) => (
-        <RouteWithSubRoutes key={i} {...route} />
-      ))}
-    </div>
-  );
-}
-
-function Bus() {
-  return <h3>Bus</h3>;
-}
-
-function Cart() {
-  return <h3>Cart</h3>;
-}
-
-////////////////////////////////////////////////////////////
-// then our route config
-const routes = [
-  {
-    path: "/sandwiches",
-    component: Sandwiches
-  },
-  {
-    path: "/tacos",
-    component: Tacos,
-    routes: [
-      {
-        path: "/tacos/bus",
-        component: Bus
-      },
-      {
-        path: "/tacos/cart",
-        component: Cart
-      }
-    ]
-  }
-];
-
-// wrap <Route> and use this everywhere instead, then when
-// sub routes are added to any route it'll work
-function RouteWithSubRoutes(route: any) {
-  return (
-    <Route
-      path={route.path}
-      render={props => (
-        // pass the sub-routes down to keep nesting
-        <route.component {...props} routes={route.routes} />
-      )}
-    />
-  );
-}
-
-function RouteConfigExample() {
-  return (
-    <Router>
+class App extends React.Component {
+  render() {
+    return (
       <div>
-        <ul>
-          <li>
-            <Link to="/tacos">Tacos</Link>
-          </li>
-          <li>
-            <Link to="/sandwiches">Sandwiches</Link>
-          </li>
-        </ul>
-
-        {routes.map((route, i) => (
-          <RouteWithSubRoutes key={i} {...route} />
-        ))}
+        <div>This is TS</div>
+        <HashRouter>
+          <Suspense fallback={<div>Loading...</div>}>
+            {/* <Switch>
+            <Route exact path="/Home" component={Home} />
+            <Route exact path="/Login" component={Login} />
+          </Switch> */}
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/Login" component={Login} />
+            </Switch>
+          </Suspense>
+        </HashRouter>
       </div>
-    </Router>
-  );
+
+    )
+  }
 }
 
-export default RouteConfigExample;
+export default App

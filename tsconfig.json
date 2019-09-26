@@ -9,14 +9,14 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
+    // "sourceMap": true,
     "noImplicitAny": true,
     "baseUrl": ".",
-    "types": [
-      // "webpack-env",
-      // "mocha",
-      // "chai"
-    ],
+    // "types": [
+    //   // "webpack-env",
+    //   // "mocha",
+    //   // "chai"
+    // ],
     "paths": {
       "@/*": [
         "src/*"

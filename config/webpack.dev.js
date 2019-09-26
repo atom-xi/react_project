@@ -20,7 +20,7 @@ const option = {
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowserPlugin({ url: "http://localhost:3000" })
+    // new OpenBrowserPlugin({ url: "http://localhost:3000" })
   ]
 }
 

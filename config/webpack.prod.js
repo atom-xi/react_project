@@ -2,11 +2,9 @@ const path = require("path")
 const merge = require("webpack-merge")
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin")
 const CleanWebpackPlugin = require("clean-webpack-plugin")
-
 const TerserWebpackPlugin = require("terser-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const common = require("./webpack.common.js")
-
-
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 
 const ENV = process.env.NODE_ENV //这里的环境变量是node的环境
@@ -23,7 +21,11 @@ let option = {
     // new CleanWebpackPlugin(["./dist"], {
     //   root: path.resolve(__dirname, "..")
     // }),
-    new UglifyJSPlugin()
+    new UglifyJSPlugin(),
+    new MiniCssExtractPlugin({
+      filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
+      chunkFilename: ENV === "production" ? "css/[name].[id].[chunkhash:8].css" : "css/[name].css"
+    })
   ],
   optimization: {
     minimizer: [

@@ -3,6 +3,16 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const ENV = process.env.NODE_ENV
+
+// let MiniCss = ""
+// if (ENV === "production") {
+//   MiniCss = new MiniCssExtractPlugin({
+//     filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
+//     chunkFilename: ENV === "production" ? "css/[name].[id].[chunkhash:8].css" : "css/[name].css"
+//   })
+// } else {
+//   MiniCss = ""
+// }
 module.exports = {
   entry: {
     polyfill: "babel-polyfill",
@@ -13,20 +23,14 @@ module.exports = {
     extensions: ['.js', '.ts', '.tsx']
   },
   plugins: [
-    // new CleanWebpackPlugin(), //新版本默认删除webpack输出中的所有文件
-    // new CleanWebpackPlugin(["./dist"], {
-    //   root: path.resolve(__dirname, "..")
-    // }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       title: "HtmlWebpackPlugin" //如果设置了 template 则 title 失效
-    }),
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
-      chunkFilename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css"
     })
+    // new MiniCssExtractPlugin({
+    //   filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
+    //   chunkFilename: ENV === "production" ? "css/[name].[id].[chunkhash:8].css" : "css/[name].css"
+    // }),
     // new webpack.optimize.CommonsChunkPlugin({
     //   names: ["vendor"],
     //   minChunks: Infinity,
@@ -63,26 +67,31 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
+        //处理css/scss/sass
+        test: /\.(css|scss|sass)$/,
+        exclude: /node_modules/,
+        loaders: [
+          ENV === "production" ? MiniCssExtractPlugin.loader : "style-loader",
           {
             loader: "css-loader",
             options: {
-              modules: true,
-              localIdentName: '[name]__[local]--[hash:base64:5]',
+              modules: true,    //是否允许模块
+              importLoaders: 20,
+              localIdentName: "[path][name]__[local]__[hash:base64:5]"
             }
           },
           {
+            loader: "sass-loader",
+          },
+          {
+            //使用postcss
             loader: "postcss-loader",
             options: {
               plugins: [
                 require("autoprefixer")
               ]
             }
-          }
+          },
         ]
       },
       {
