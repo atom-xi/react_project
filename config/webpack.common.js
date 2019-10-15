@@ -4,15 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const ENV = process.env.NODE_ENV
 
-// let MiniCss = ""
-// if (ENV === "production") {
-//   MiniCss = new MiniCssExtractPlugin({
-//     filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
-//     chunkFilename: ENV === "production" ? "css/[name].[id].[chunkhash:8].css" : "css/[name].css"
-//   })
-// } else {
-//   MiniCss = ""
-// }
 module.exports = {
   entry: {
     polyfill: "babel-polyfill",
@@ -26,11 +17,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       title: "HtmlWebpackPlugin" //如果设置了 template 则 title 失效
-    })
-    // new MiniCssExtractPlugin({
-    //   filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
-    //   chunkFilename: ENV === "production" ? "css/[name].[id].[chunkhash:8].css" : "css/[name].css"
-    // }),
+    }),
+    new MiniCssExtractPlugin({
+      filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
+      chunkFilename: ENV === "production" ? "css/[name].[id].[chunkhash:8].css" : "css/[name].css"
+    }),
     // new webpack.optimize.CommonsChunkPlugin({
     //   names: ["vendor"],
     //   minChunks: Infinity,
@@ -44,6 +35,13 @@ module.exports = {
           name: "vendor",
           chunks: "initial",
           minChunks: 1
+        },
+        styles: {
+          name: 'styles',
+          test: /\.(css|scss|sass)$/,
+          chunks: 'initial',
+          minChunks: 5,
+          enforce: true,
         }
       }
     }
@@ -63,6 +61,7 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
+          // loader: "awesome-typescript-loader",
           loader: "ts-loader",
         }
       },

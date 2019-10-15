@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "esnext",
     "strict": true,
     "jsx": "react",
     "importHelpers": true,
@@ -9,25 +9,25 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    // "sourceMap": true,
+    "sourceMap": true,
     "noImplicitAny": true,
-    "baseUrl": ".",
+    "baseUrl": "."
     // "types": [
     //   // "webpack-env",
     //   // "mocha",
     //   // "chai"
     // ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    // "paths": {
+    //   "@/*": [
+    //     "src/*"
+    //   ]
+    // },
+    // "lib": [
+    //   "esnext",
+    //   "dom",
+    //   "dom.iterable",
+    //   "scripthost"
+    // ]
   },
   "include": [
     "src/**/*.ts",

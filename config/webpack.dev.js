@@ -12,11 +12,6 @@ const option = {
     publicPath: "./"
   },
   devtool: "inline-source-map",
-  // devServer: {
-  //   // contentBase: "../dist",
-  //   // hot: true
-  //   // historyApiFallback: true
-  // },
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
