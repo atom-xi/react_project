@@ -11,7 +11,7 @@ const options = {
   port: 3003, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
   proxy: Object.assign(proxies, {
     '/': {
-      target: 'localhost:3002',
+      target: 'http://10.10.20.150:3002',// 记得 "http://" 不然接口504
       changeOrigin: true,
       toProxy: false,
       prependPath: false,

@@ -25,6 +25,9 @@ class Home extends React.Component<P, S> {
     axios.get("/newscontent").then(resp => {
       console.log("resp-->", resp)
     })
+    axios.post("/user/register", { name: "cai", password: "123" }).then(resp => {
+      console.log("resp-->", resp)
+    })
   }
   componentDidMount() {
     // 假如通过setState设置并不存在的c，TS无法检查到。
