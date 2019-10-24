@@ -1,5 +1,6 @@
 import React from "react";
-import axios from "axios";
+import axios from "../../http/http"
+
 interface P {
   name: string;
   age: number
@@ -21,12 +22,30 @@ class Home extends React.Component<P, S> {
     init_name: "init_name is xxx!!",
     init_age: 12
   }
-  componentWillMount() {
-    axios.get("/newscontent").then(resp => {
+  async Login() {
+    // let a = await axios.get("/info")
+    // let a = await this.s()
+  }
+  btn() {
+    console.log("document.cookie-->", document.cookie)
+    axios.get("/info").then((resp: any) => {
       console.log("resp-->", resp)
+      console.log("resp-->", typeof resp)
+      this.setState({
+        init_age: resp.data.message
+      })
     })
-    axios.post("/user/register", { name: "cai", password: "123" }).then(resp => {
+  }
+  componentWillMount() {
+    // this.s();
+    // this.Login()
+    // axios.get("/info").then(resp => {
+    //   console.log("resp-->", resp)
+    //   console.log("resp-->", typeof resp)
+    // })
+    axios.post("/user/login", { name: "cai", password: "123" }).then((resp: any) => {
       console.log("resp-->", resp)
+      console.log("resp-->", typeof resp)
     })
   }
   componentDidMount() {
@@ -44,8 +63,8 @@ class Home extends React.Component<P, S> {
         <div>This is Home view</div>
         <div>{this.state.init_name}</div>
         <div>{this.state.init_age}</div>
+        <button onClick={() => { this.btn() }}>{this.state.init_age}</button>
       </div>
-
     )
   }
 }

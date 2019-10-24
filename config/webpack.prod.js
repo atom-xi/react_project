@@ -37,7 +37,7 @@ let option = {
         },
       }),
     ]
-  },
+  }
 }
 
 if (ENV === "production_test") {

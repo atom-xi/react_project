@@ -10,15 +10,17 @@ const options = {
   host: '0.0.0.0', // 允许通过其他ip访问
   port: 3003, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
   proxy: Object.assign(proxies, {
-    '/': {
-      target: 'http://10.10.20.150:3002',// 记得 "http://" 不然接口504
+    '/api/': {
+      target: 'http://localhost:3002',// 记得 "http://" 不然接口504
       changeOrigin: true,
-      toProxy: false,
-      prependPath: false,
+      // toProxy: false,
+      // prependPath: false,
       secure: false, // 接受 运行在 https 上的服务
     },
-  }),
-
+  })
+  // cookiePathRewrite: {
+  //   "/old.path/": "/new.path/",
+  // }
 }
 
 webpackDevServer.addDevServerEntrypoints(config, options)
