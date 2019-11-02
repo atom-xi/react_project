@@ -1,7 +1,7 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-
-const ENV = process.env.NODE_ENV
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
+const ENV = process.env.NODE_ENV;
 
 module.exports = {
   entry: {
@@ -10,7 +10,7 @@ module.exports = {
     ventor: ["axios", "react", "react-dom", "react-router-dom"]
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx']
+    extensions: [".js", ".ts", ".tsx"]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -36,9 +36,9 @@ module.exports = {
           minChunks: 1
         },
         styles: {
-          name: 'styles',
+          name: "styles",
           test: /\.(css|scss|sass)$/,
-          chunks: 'initial',
+          chunks: "initial",
           minChunks: 5,
           enforce: true,
         }
@@ -55,6 +55,13 @@ module.exports = {
           }
         ],
         exclude: /node_modules/,
+      },
+      {
+        test: /\.tsx$/,
+        loader: "eslint-loader",
+        enforce: "pre",
+        exclude: /node_modules/,
+        include: [path.resolve(__dirname, "../src")], // 指定检查的目录
       },
       {
         test: /\.tsx?$/,
@@ -110,4 +117,4 @@ module.exports = {
       }
     ]
   }
-}
+};

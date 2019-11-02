@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from 'react';
-import { HashRouter, Route, Link, Switch } from "react-router-dom";
+import React, { /*lazy ,*/ Suspense } from "react";
+// import { HashRouter, Route, Link, Switch } from "react-router-dom";
 import style from "./App.scss"
-const Home = React.lazy(() => import('./view/home/Home'));
-const Login = React.lazy(() => import('./view/login/Login'));
+const Home = React.lazy(() => import("./view/home/Home"));
+// const Login = React.lazy(() => import('./view/login/Login'));
 
 class App extends React.Component {
   render() {

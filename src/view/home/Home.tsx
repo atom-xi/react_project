@@ -2,13 +2,13 @@ import React from "react";
 import axios from "../../http/http"
 
 interface P {
-  name: string;
-  age: number
+  name?: string;
+  age?: number
 }
 
 interface S {
   init_name: string;
-  init_age: number
+  init_age: number,
 }
 
 class Home extends React.Component<P, S> {
@@ -16,7 +16,7 @@ class Home extends React.Component<P, S> {
   constructor(props: P) {
     super(props)
     // console.log(props)
-    this.state.init_age = props.age
+    this.state.init_age = props.age || 0
   }
   public state = {
     init_name: "init_name is xxx!!",
@@ -28,6 +28,11 @@ class Home extends React.Component<P, S> {
   }
   btn() {
     console.log("document.cookie-->", document.cookie)
+    let a = "12"
+    let c = "12"
+    if (a === c) {
+      console.log("OK")
+    }
     axios.get("/info").then((resp: any) => {
       console.log("resp-->", resp)
       console.log("resp-->", typeof resp)
@@ -36,21 +41,13 @@ class Home extends React.Component<P, S> {
       })
     })
   }
-  componentWillMount() {
-    // this.s();
-    // this.Login()
-    // axios.get("/info").then(resp => {
-    //   console.log("resp-->", resp)
-    //   console.log("resp-->", typeof resp)
-    // })
+  componentDidMount() {
+    // 假如通过setState设置并不存在的c，TS无法检查到。
+    // console.log("this.state-->", this.state)
     axios.post("/user/login", { name: "cai", password: "123" }).then((resp: any) => {
       console.log("resp-->", resp)
       console.log("resp-->", typeof resp)
     })
-  }
-  componentDidMount() {
-    // 假如通过setState设置并不存在的c，TS无法检查到。
-    // console.log("this.state-->", this.state)
     this.setState({
       // init_age: this.props.age
     })
