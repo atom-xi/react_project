@@ -56,9 +56,14 @@ module.exports = {
         ],
         exclude: /node_modules/,
       },
+      //静态检查TS
       {
         test: /\.tsx$/,
-        loader: "eslint-loader",
+        use: [
+          {
+            loader: "eslint-loader"
+          }
+        ],
         enforce: "pre",
         exclude: /node_modules/,
         include: [path.resolve(__dirname, "../src")], // 指定检查的目录
@@ -67,7 +72,6 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
-          // loader: "awesome-typescript-loader",
           loader: "ts-loader",
         }
       },
@@ -75,7 +79,7 @@ module.exports = {
         //处理css/scss/sass
         test: /\.(css|scss|sass)$/,
         exclude: /node_modules/,
-        loaders: [
+        use: [
           ENV === "production" ? MiniCssExtractPlugin.loader : "style-loader",
           {
             loader: "css-loader",
@@ -86,9 +90,6 @@ module.exports = {
             }
           },
           {
-            loader: "sass-loader",
-          },
-          {
             //使用postcss
             loader: "postcss-loader",
             options: {
@@ -97,6 +98,10 @@ module.exports = {
               ]
             }
           },
+          {
+            loader: "sass-loader",
+          }
+
         ]
       },
       {
