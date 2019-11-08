@@ -1,9 +1,10 @@
 import React from "react";
+import style from "./Login.scss"
 
 class Login extends React.Component {
   render() {
     return (
-      <div>This is Login view</div>
+      <div className={style.c}>This is Login view</div>
     )
   }
 }

@@ -8,6 +8,7 @@
     "server": "cross-env NODE_ENV=development node config/server.js --progress",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js --progress",
     "build:test": "cross-env NODE_ENV=production_test webpack --config config/webpack.prod.js --progress",
+    "analyz": "NODE_ENV=production npm_config_report=true npm run build",
     "test": "karma start"
   },
   "keywords": [],

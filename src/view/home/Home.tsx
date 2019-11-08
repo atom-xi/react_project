@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "../../http/http"
+import style from "./Home.scss"
 
 interface P {
   name?: string;
@@ -57,7 +58,7 @@ class Home extends React.Component<P, S> {
   render() {
     return (
       <div>
-        <div>This is Home view</div>
+        <div className={style.c}>This is Home view</div>
         <div>{this.state.init_name}</div>
         <div>{this.state.init_age}</div>
         <button onClick={() => { this.btn() }}>{this.state.init_age}</button>

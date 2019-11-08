@@ -1,13 +1,15 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
-const ENV = process.env.NODE_ENV;
+let ENV = "";
 
+if (process.env.NODE_ENV === "production_test" || process.env.NODE_ENV === "production") {
+  ENV = "production"
+}
 module.exports = {
   entry: {
     polyfill: "babel-polyfill",
-    app: "./src/index.tsx",
-    ventor: ["axios", "react", "react-dom", "react-router-dom"]
+    app: "./src/index.tsx"
   },
   resolve: {
     extensions: [".js", ".ts", ".tsx"]
@@ -19,22 +21,24 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
-      chunkFilename: ENV === "production" ? "css/[name].[id].[chunkhash:8].css" : "css/[name].css"
-    }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   names: ["vendor"],
-    //   minChunks: Infinity,
-    //   filename: "js/common.bundle.[chunkhash:8].js"
-    // })
+      chunkFilename: ENV === "production" ? "css/[name].[id].[chunkhash:8].css" : "css/[id].css"
+    })
   ],
   optimization: {
+    moduleIds: 'hashed',
+    runtimeChunk: true,
     splitChunks: {
       cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors'
+        },
         commons: {
-          name: "vendor",
+          name: "commons",
           chunks: "initial",
           minChunks: 1
-        },
+        }
+        ,
         styles: {
           name: "styles",
           test: /\.(css|scss|sass)$/,

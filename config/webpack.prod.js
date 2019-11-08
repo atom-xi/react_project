@@ -25,6 +25,9 @@ let option = {
     new MiniCssExtractPlugin({
       filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
       chunkFilename: ENV === "production" ? "css/[name].[id].[chunkhash:8].css" : "css/[name].css"
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
     })
   ],
   optimization: {
@@ -40,11 +43,11 @@ let option = {
   }
 }
 
-if (ENV === "production_test") {
-  let BundleAnalyzer = new BundleAnalyzerPlugin({
-    analyzerPort: 9500
-  })
-  option.plugins.push(BundleAnalyzer)
-}
+// if (ENV === "production_test") {
+//   let BundleAnalyzer = new BundleAnalyzerPlugin({
+//     analyzerPort: 9500
+//   })
+//   option.plugins.push(BundleAnalyzer)
+// }
 
 module.exports = merge(common, option)
