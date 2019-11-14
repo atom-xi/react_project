@@ -1,17 +1,19 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
-let ENV = "";
+const CopyPlugin = require("copy-webpack-plugin");
+const ENV = process.env.NODE_ENV;
 
-if (process.env.NODE_ENV === "production_test" || process.env.NODE_ENV === "production") {
-  ENV = "production"
-}
 module.exports = {
   entry: {
     polyfill: "babel-polyfill",
     app: "./src/index.tsx"
   },
   resolve: {
+    // 设置别名
+    alias: {
+      '@src': path.resolve('src')
+    },
     extensions: [".js", ".ts", ".tsx"]
   },
   plugins: [
@@ -22,7 +24,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: ENV === "production" ? "css/[name].[chunkhash:8].css" : "css/[name].css",
       chunkFilename: ENV === "production" ? "css/[name].[id].[chunkhash:8].css" : "css/[id].css"
-    })
+    }),
+    new CopyPlugin([
+      { from: './src/static', to: 'static' }
+    ])
   ],
   optimization: {
     moduleIds: 'hashed',

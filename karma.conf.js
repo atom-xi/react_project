@@ -16,7 +16,8 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       "node_modules/should/should.js",
-      "test/test.spec.js",
+      "test/**/*.spec.js",
+      // 'test/**/*.spec.ts',
       "Enter empty string to move to the next question."
     ],
 
@@ -67,6 +68,13 @@ module.exports = function (config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
+    coverageReporter: {
+      dir: './coverage',
+      reporters: [
+        { type: 'lcov', subdir: '.' },
+        { type: 'text-summary' }
+      ]
+    }
   });
 };

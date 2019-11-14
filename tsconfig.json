@@ -11,23 +11,12 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "noImplicitAny": true,
-    "baseUrl": "."
-    // "types": [
-    //   // "webpack-env",
-    //   // "mocha",
-    //   // "chai"
-    // ],
-    // "paths": {
-    //   "@/*": [
-    //     "src/*"
-    //   ]
-    // },
-    // "lib": [
-    //   "esnext",
-    //   "dom",
-    //   "dom.iterable",
-    //   "scripthost"
-    // ]
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ] // This mapping is relative to "baseUrl"
+    }
   },
   "include": [
     "src/**/*.ts",

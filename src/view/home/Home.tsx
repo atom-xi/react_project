@@ -53,8 +53,6 @@ class Home extends React.Component<P, S> {
       // init_age: this.props.age
     })
   }
-  componentWillUnmount() {
-  }
   render() {
     return (
       <div>
