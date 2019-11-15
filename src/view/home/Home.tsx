@@ -2,6 +2,8 @@ import React from "react";
 import axios from "../../http/http"
 import style from "./Home.scss"
 
+// console.log("style", style)
+
 interface P {
   name?: string;
   age?: number
@@ -45,10 +47,10 @@ class Home extends React.Component<P, S> {
   componentDidMount() {
     // 假如通过setState设置并不存在的c，TS无法检查到。
     // console.log("this.state-->", this.state)
-    axios.post("/user/login", { name: "cai", password: "123" }).then((resp: any) => {
-      console.log("resp-->", resp)
-      console.log("resp-->", typeof resp)
-    })
+    // axios.post("/user/login", { name: "cai", password: "123" }).then((resp: any) => {
+    //   console.log("resp-->", resp)
+    //   console.log("resp-->", typeof resp)
+    // })
     this.setState({
       // init_age: this.props.age
     })

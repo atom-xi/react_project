@@ -6,7 +6,7 @@ const ENV = process.env.NODE_ENV;
 
 module.exports = {
   entry: {
-    polyfill: "babel-polyfill",
+    polyfill: "@babel/polyfill",
     app: "./src/index.tsx"
   },
   resolve: {
@@ -78,8 +78,8 @@ module.exports = {
         include: [path.resolve(__dirname, "../src")], // 指定检查的目录
       },
       {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
+        test: /\.(ts|tsx)?$/,
+        exclude: [/node_modules/, /test/],
         use: {
           loader: "ts-loader",
         }
@@ -94,7 +94,7 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: true,    //是否允许模块
-              importLoaders: 20,
+              importLoaders: 1,
               localIdentName: "[path][name]__[local]__[hash:base64:5]"
             }
           },

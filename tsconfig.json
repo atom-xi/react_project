@@ -21,8 +21,6 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "test/**/*.ts",
-    "test/**/*.tsx",
     "module.d.ts"
   ],
   "exclude": [

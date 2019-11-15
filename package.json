@@ -9,20 +9,25 @@
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js --progress",
     "build:test": "cross-env NODE_ENV=production_test webpack --config config/webpack.prod.js --progress",
     "analyz": "NODE_ENV=production npm_config_report=true npm run build",
-    "test": "karma start"
+    "test//": "jest",
+    "test": "mocha --require @babel/register test/Login.test.js"
   },
   "keywords": [],
   "author": "atom-xi",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@babel/register": "^7.7.0",
+    "@types/jest": "^24.0.23",
+    "@types/mocha": "^5.2.7",
+    "@types/should": "^13.0.0",
     "@typescript-eslint/eslint-plugin": "^2.7.0",
     "@typescript-eslint/parser": "^2.6.0",
     "autoprefixer": "^9.6.1",
-    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
     "chai": "^4.2.0",
     "clean-webpack-plugin": "^2.0.1",
     "copy-webpack-plugin": "^5.0.5",
@@ -48,12 +53,14 @@
     "node-sass": "^4.13.0",
     "open-browser-webpack-plugin": "0.0.5",
     "postcss-loader": "^3.0.0",
+    "react-addons-test-utils": "^15.6.2",
     "react-hot-loader": "^4.12.14",
     "sass-loader": "^8.0.0",
     "should": "^13.2.3",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^2.0.1",
+    "ts-jest": "^24.1.0",
     "ts-loader": "^6.1.0",
     "typescript": "^3.6.3",
     "uglifyjs-webpack-plugin": "^2.1.2",
@@ -72,6 +79,17 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
   },
   "browserslist": [
     "iOS >= 6",

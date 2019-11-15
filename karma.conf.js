@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Tue Sep 17 2019 15:50:56 GMT+0800 (GMT+08:00)
+// const webpackConfig = require("./config/webpack.dev")
 
 module.exports = function (config) {
   config.set({
@@ -16,7 +17,8 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       "node_modules/should/should.js",
-      "test/**/*.spec.js",
+      "test/Login.test.ts",
+      // "test/**/*.test.ts",
       // 'test/**/*.spec.ts',
       "Enter empty string to move to the next question."
     ],
@@ -33,6 +35,8 @@ module.exports = function (config) {
     preprocessors: {
     },
 
+
+    // webpack: webpackConfig,
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -60,6 +64,7 @@ module.exports = function (config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ["Chrome"],
+
 
 
     // Continuous Integration mode

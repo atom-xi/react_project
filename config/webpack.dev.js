@@ -2,7 +2,7 @@ const merge = require("webpack-merge")
 const common = require("./webpack.common.js")
 const webpack = require("webpack")
 const path = require("path")
-const OpenBrowserPlugin = require("open-browser-webpack-plugin")
+// const OpenBrowserPlugin = require("open-browser-webpack-plugin")
 
 const option = {
   mode: "development",
